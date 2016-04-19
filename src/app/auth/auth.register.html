@@ -1,0 +1,37 @@
+<div ng-controller="authRegisterController">
+  <form class="form" ng-submit="registerFn()">
+    <div class="form-group">
+      <label class="form-control" for="username">Username</label>
+      <input class="form-control" type="text" ng-model="registerForm.username" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="firstName">First Name</label>
+      <input class="form-control" type="text" ng-model="registerForm.names.firstName" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="email">Email</label>
+      <input class="form-control" type="email" ng-model="registerForm.email" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="password">Password</label>
+      <input class="form-control" type="password" ng-model="registerForm.password" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="dob">Date of Birth</label>
+      <input class="form-control" type="date" ng-model="registerForm.dob" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="slug">slug</label>
+      <input class="form-control" type="text" ng-model="registerForm.slug" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="lat">Lat</label>
+      <input class="form-control" type="text" ng-model="registerForm.address.geo.lat" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-control" for="lng">Long</label>
+      <input class="form-control" type="text" ng-model="registerForm.address.geo.lng" value="">
+    </div>
+    <input class="form-control" type="submit" value="Submit">
+  </form>
+</div>
