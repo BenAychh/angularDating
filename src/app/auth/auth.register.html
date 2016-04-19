@@ -24,13 +24,8 @@
       <label class="form-control" for="slug">slug</label>
       <input class="form-control" type="text" ng-model="registerForm.slug" value="">
     </div>
-    <div class="form-group">
-      <label class="form-control" for="lat">Lat</label>
-      <input class="form-control" type="text" ng-model="registerForm.address.geo.lat" value="">
-    </div>
-    <div class="form-group">
-      <label class="form-control" for="lng">Long</label>
-      <input class="form-control" type="text" ng-model="registerForm.address.geo.lng" value="">
+      <input class="form-control" type="hidden" ng-model="registerForm.address.geo.lat" value="">
+      <input class="form-control" type="hidden" ng-model="registerForm.address.geo.lng" value="">
     </div>
     <input class="form-control" type="submit" value="Submit">
   </form>
