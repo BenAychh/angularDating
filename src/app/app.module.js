@@ -3,17 +3,18 @@
 
   angular.module('app', [
     'app.auth',
+    'app.home',
     'ui.router',
   ]).config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('app', {
         url: '/',
-        template: '<div>index</div>'
+        templateUrl: '/app/app.main.html',
       })
       .state('auth', {
         url: '/auth',
         templateUrl: '/app/auth/auth.home.html'
       })
-    $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.otherwise('/');
   });
 })();

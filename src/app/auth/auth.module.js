@@ -2,16 +2,16 @@
   'use strict';
 
   angular.module('app.auth', ['ui.router'])
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider) {
     $stateProvider
       .state('auth.login', {
-        url: '/loing',
-        template: '<div>Login</div>'
+        url: '/login',
+        templateUrl: '/app/auth/auth.login.html',
+        controller: 'authLoginController',
       })
       .state('auth.register', {
-        url: '/auth',
-        template: 'Register'
+        url: '/register',
+        templateUrl: '/app/auth/auth.register.html'
       })
-    $urlRouterProvider.otherwise('/');
-  }]);
+  });
 })();

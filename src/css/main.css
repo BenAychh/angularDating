@@ -1,1 +1,37 @@
-/* add custom styles */
+body {
+  background-image: url('/img/background.jpg');
+}
+.carousel {
+  margin-left: -20px;
+  margin-right: -20px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.carousel .container {
+
+}
+.carousel .item {
+  height: 300px;
+}
+.carousel img {
+  height: 300px;
+}
+.carousel-caption {
+  width: 65%;
+  padding: 0 70px;
+  margin-top: 100px;
+}
+.carousel-caption h1 {
+  font-size: 30px;
+}
+.carousel-caption .lead,
+.carousel-caption .btn {
+  font-size: 18px;
+}
+.jumbotron {
+  background-color: rgba(0, 0, 0, 0.8);
+  margin-top: 0;
+  color: white;
+}
+.navbar {
+  background-color: rgb(255, 255, 255);
+}
