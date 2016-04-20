@@ -15,6 +15,11 @@
         url: '/auth',
         templateUrl: '/app/auth/auth.home.html'
       })
+      .state('home', {
+        url: '/home',
+        templateUrl: '/app/home/index/index.html',
+        controller: 'homeIndexController'
+      })
     $urlRouterProvider.otherwise('/');
   });
 })();

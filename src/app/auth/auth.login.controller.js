@@ -5,16 +5,16 @@
     .module('app.auth')
     .controller('authLoginController', authLoginController);
 
-  authLoginController.$inject = ['$scope', '$rootScope', 'authService', '$location'];
+  authLoginController.$inject = ['$scope', '$rootScope', 'authService', '$state'];
 
-  function authLoginController($scope, $rootScope, authService, $location) {
+  function authLoginController($scope, $rootScope, authService, $state) {
     $scope.loginForm = {};
     $scope.loginFn = () => {
       authService.login($scope.loginForm)
       .done((res) => {
         console.log(res);
         authService.setUserInfo(res);
-        $location.path('#/home');
+        $state.go('home');
         $rootScope.currentUser = authService.getUserInfo();
       })
       .fail(err => {

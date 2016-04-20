@@ -11,7 +11,8 @@
       })
       .state('auth.register', {
         url: '/register',
-        templateUrl: '/app/auth/auth.register.html'
+        templateUrl: '/app/auth/auth.register.html',
+        controller: 'authRegisterController'
       })
   });
 })();

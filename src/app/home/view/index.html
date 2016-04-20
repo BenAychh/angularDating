@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+  <div class="" ng-controller="homeViewController">
+    {{params}}
+    <p>
+      <img class="img-responsive" ng-src="{{profile.avatar}}" alt="{{profile.names.firstName}}" />
+    </p>
+    <div class="">
+      <h2>
+        Name: {{profile.names.firstName}} {{profile.names.lastName}}
+      </h2>
+      <h2>
+        Website: {{profile.website}}
+      </h2>
+      <h2>
+        Interested In: <ng-pluralize count="profile.interestedIn" when="{
+          '0': 'Women',
+          '1': 'Men',
+          '2': 'Both',
+          '3': 'Friends Only'
+        }"  offset=""></ng-pluralize>
+      </h2>
+      <h2>
+        Gender: <ng-pluralize count="profile.interestedIn" when="{
+          '0': 'Women',
+          '1': 'Men',
+          '2': 'Both',
+          '3': 'Friends Only'
+        }"  offset=""></ng-pluralize>
+      </h2>
+      <h2>
+        City: {{profile.address.city}}
+      </h2>
+    </div>
+
+  </div>
+</div>

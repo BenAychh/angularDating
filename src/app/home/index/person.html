@@ -1,0 +1,13 @@
+<div class="row panel panel-default">
+  <div class="col-xs-4">
+    <h3>
+      <a ui-sref="home.view({ id: profile._id })">
+        <img class="img-responsive" ng-src="{{profile.avatar}}" alt="{{profile.names.firstName + profile.names.lastName}}"/>
+      </a>
+    </h3>
+  </div>
+  <div class="col-xs-8">
+    <h3 class="pull-left">{{profile.names.firstName}} {{profile.names.lastName}}</h3>
+    <p class="pull-left">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container" ng-controller="homeIndexController">
+  <div class="col-xs-4">
+    <img src="/img/loading.gif" alt="Loading" ng-hide="dataReceived" class="img-responsive"/>
+    <person ng-repeat="profile in profiles" info="profile">
+
+    </person>
+  </div>
+  <div class="col-xs-8">
+    <div ui-view></div>
+  </div>
+</div>
