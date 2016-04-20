@@ -8,8 +8,10 @@
   homeSearchController.$inject = ['$scope', '$rootScope', 'memberService'];
   function homeSearchController($scope, $rootScope, memberService) {
     $scope.doSearch = function() {
+      $scope.searching = true;
       memberService.searchMembers($scope.searchForm).
       then(searchResults => {
+        $scope.searching = false;
         $scope.searchProfiles = searchResults;
       })
     }

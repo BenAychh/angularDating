@@ -43,7 +43,6 @@
         });
         return service.getMembers()
         .then(members => {
-          console.log(searchObject);
           return filterByObject(members, searchObject, strict);
         });
       }
@@ -51,16 +50,28 @@
     return service;
   }
   function filterByObject(arrayOfObjects, filters, strict) {
+    console.log(filters, strict);
+    var bool1 = true;
+    var bool2 = false;
+    var compare = function (a, b) {
+      return a == b;
+    }
+    if (strict == 'true') {
+      var bool1 = false;
+      var bool2 = true;
+      compare = function (b, a) {
+        return a != b;
+      }
+    }
     return arrayOfObjects.filter(object => {
       var flatObject = flattenObject(object);
       var keys = Object.keys(filters);
       for (var i = 0; i < keys.length; i++) {
-        console.log(flatObject[keys[i]], filters[keys[i]]);
-        if (flatObject[keys[i]] == filters[keys[i]]) {
-          return true;
+        if (compare(flatObject[keys[i]], filters[keys[i]])) {
+          return bool1;
         }
       }
-      return false;
+      return bool2;
     });
   }
   function flattenObject(ob) {
