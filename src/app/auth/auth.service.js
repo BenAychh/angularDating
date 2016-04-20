@@ -20,11 +20,11 @@
         })
       },
       setUserInfo: function(userData) {
-        $window.localStorage.setItem('user', JSON.stringify(userData.user));
-        $window.localStorage.setItem('token', JSON.stringify(userData.token));
+        $window.localStorage.setItem('user', JSON.stringify(userData.data.user));
+        $window.localStorage.setItem('token', JSON.stringify(userData.data.token));
       },
       getUserInfo: function(userData) {
-        return $window.localStorage.getItem('user');
+        return JSON.parse($window.localStorage.getItem('user'));
       },
     }
     return service;

@@ -14,5 +14,10 @@
         templateUrl: '/app/auth/auth.register.html',
         controller: 'authRegisterController'
       })
+      .state('auth.logout', {
+        url: '/logout',
+        template: '<div>Logging Out</div>',
+        controller: 'authLogoutController',
+      })
   });
 })();
