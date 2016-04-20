@@ -23,7 +23,7 @@
       .state('home.search', {
         url: '/search',
         templateUrl: '/app/home/search/index.html',
-        controller: 'homeSearchController',
+        // controller: 'homeSearchController',
       })
       .state('home.edit', {
         url: '/edit',

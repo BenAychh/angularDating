@@ -9,6 +9,6 @@
 
   function authLogoutController($rootScope, $state) {
     $rootScope.currentUser = null;
-    $state.go('app');
+    $state.go('app'); 
   }
 })();

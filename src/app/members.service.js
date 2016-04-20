@@ -31,35 +31,53 @@
           return tempMembers;
         })
         .catch(err => console.log(err));
-      }
+      },
       searchMembers: (params) => {
         var strict = params.strict;
-        delete params.strict;
-        var filledInKeys = Object.keys(params).filter(key => params[key] != '');
+        var params2 = JSON.parse(JSON.stringify(params));
+        delete params2.strict;
+        var filledInKeys = Object.keys(params2).filter(key => params2[key] != '');
         var searchObject = {};
         filledInKeys.forEach(key => {
-          searchObject[key] = params[key];
+          searchObject[key] = params2[key];
         });
-        return filterByObject(members, searchObject, strict);
+        return service.getMembers()
+        .then(members => {
+          console.log(searchObject);
+          return filterByObject(members, searchObject, strict);
+        });
       }
     }
     return service;
   }
   function filterByObject(arrayOfObjects, filters, strict) {
-    var bool1 = false;
-    var bool2 = true;
-    if (strict) {
-      bool1 = true;
-      bool2 = false;
-    }
     return arrayOfObjects.filter(object => {
-      var keys = Object.keys(filter);
-      for (i = 0; i < keys.length; i++) {
-        if (object[keys[i]] !== filter[keys[i]]) {
-          return bool1;
+      var flatObject = flattenObject(object);
+      var keys = Object.keys(filters);
+      for (var i = 0; i < keys.length; i++) {
+        console.log(flatObject[keys[i]], filters[keys[i]]);
+        if (flatObject[keys[i]] == filters[keys[i]]) {
+          return true;
         }
       }
-      return bool2;
+      return false;
     });
   }
+  function flattenObject(ob) {
+    var toReturn = {};
+
+    for (var i in ob) {
+      if (!ob.hasOwnProperty(i)) { continue };
+      if ((typeof ob[i]) == 'object') {
+        var flatObject = flattenObject(ob[i]);
+        for (var x in flatObject) {
+          if (!flatObject.hasOwnProperty(x)) { continue };
+          toReturn[i + '_' + x] = flatObject[x];
+        }
+      } else {
+        toReturn[i] = ob[i];
+      }
+    }
+    return toReturn;
+  };
 })();
