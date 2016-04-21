@@ -1,9 +1,23 @@
 <div class="container" ng-controller="homeIndexController">
-  <div class="col-xs-4">
-    <img src="/img/loading.gif" alt="Loading" ng-hide="dataReceived" class="img-responsive"/>
-    <person ng-repeat="profile in profiles" info="profile">
+  <div class="col-xs-3">
+    <div class="row">
+      <div class="center">
+        <span class="clickable" ng-click="getNew(5)">New</span> |
+        <span class="clickable" ng-click="getMatches()">Matches</span> |
+        <span class="clickable">Popular</span> |
+        <span class="clickable">Near Me</span> |
+        <span class="clickable">Chatting</span>
+      </div>
+    </div>
+    <div class="row">
+      <img src="/img/loading.gif" alt="Loading" ng-hide="dataReceived" class="img-responsive"/>
+      <person ng-show="dataReceived" ng-repeat="profile in profiles" info="profile">
 
-    </person>
+      </person>
+    </div>
+  </div>
+  <div class="col-xs-1">
+
   </div>
   <div class="col-xs-8">
     <div ui-view></div>

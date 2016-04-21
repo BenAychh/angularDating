@@ -7,6 +7,7 @@
   var back = 'https://galvanize-student-apis.herokuapp.com/gdating/members/';
   function memberService($http) {
     var members = [];
+    var popularOffset = 0;
     var service = {
       getMember: (userId) => $http.get(back + '/' + userId).then(res => res.data.data),
       getMembers: (count) => {
@@ -37,21 +38,39 @@
         .catch(err => console.log('Error:', err));
       },
       getMatches: (id, force) => {
+        console.log(id);
         return $http.get(back + id + '/matches')
         .then(matches => {
-          var arrayOfMatchIds = matches.reduce((prev, match) => {
+          var arrayOfMatchIds = matches.data.data.reduce((prev, match) => {
             prev.push(match._id);
+            return prev;
           }, []);
           return service.getMembers(force)
           .then(members => {
             var fullInfoMatches =
                 members.filter(member => arrayOfMatchIds.indexOf(member._id) !== -1);
-            if (matches.length != fullInfoMatches.length) {
-              return getMatches(id, true);
+            if (matches.data.data.length != fullInfoMatches.length) {
+              return service.getMatches(id, true);
             }
-            console.log(fullInfoMatches);
             return fullInfoMatches;
           })
+          .catch(err => console.log('Error:', err));
+        })
+      },
+      getPopular: (forwards) => {
+        return service.getMembers()
+        .then(members => {
+          var popSorted =  members.sort((a, b) => {
+            return a.matches.length - b.matches.length;
+          })
+          if (forwards === true) {
+            popularOffset += 5;
+            popularOffset = Math.min(popSorted.length - 5, popularOffset);
+          } else if (forwards === false) {
+            popularOffset -= 5;
+            popularOffset = Math.max(0, popularOffset);
+          }
+          return popSorted.slice(popularOffset, popularOffset + 5);
         })
       }
     }
@@ -70,8 +89,7 @@
     function getMembersFromLocal(count) {
       console.log('count: ', count);
       if (!count || count === true) {
-        console.log('here?');
-        return members;
+        return members.slice();
       }
       var randoms = [];
       while (randoms.length < count) {
@@ -134,6 +152,15 @@
       });
     }
   }
+
+  /**
+   * flattenObject - Flattens an object for easy searching but does not flatten
+   * arrays.
+   *
+   * @param  {Object} ob The object to be flattened
+   * @return {Object}    A flattened array (names.firstName becomes
+   * names_firstName). Arrays are not flattened.
+   */
   function flattenObject(ob) {
     var toReturn = {};
 

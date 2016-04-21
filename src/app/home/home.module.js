@@ -12,7 +12,7 @@
       })
       .state('home.view', {
         url: '/view?id',
-        templateUrl: '/app/home/view/index.html',
+        templateUrl: '/app/home/view/view.index.html',
         controller: 'homeViewController',
       })
       .state('home.match', {
@@ -22,8 +22,7 @@
       })
       .state('home.search', {
         url: '/search',
-        templateUrl: '/app/home/search/index.html',
-        // controller: 'homeSearchController',
+        templateUrl: '/app/home/search/search.index.html',
       })
       .state('home.edit', {
         url: '/edit',

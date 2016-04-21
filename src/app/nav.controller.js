@@ -5,10 +5,12 @@
     .module('app')
     .controller('navBarController', navBarController);
 
-  navBarController.$inject = ['$scope', '$rootScope', 'authService'];
+  navBarController.$inject = ['$scope', '$rootScope', 'authService', '$state'];
 
-  function navBarController($scope, $rootScope, authService) {
-    console.log($scope.user);
+  function navBarController($scope, $rootScope, authService, $state) {
     $rootScope.currentUser = authService.getUserInfo();
+    if ($rootScope.currentUser) {
+      $state.go('home');
+    }
   }
 })();
