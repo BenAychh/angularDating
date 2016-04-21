@@ -7,7 +7,9 @@
   var back = 'https://galvanize-student-apis.herokuapp.com/gdating/members/';
   function memberService($http) {
     var members = [];
-    var popularOffset = 0;
+    var offset = {};
+    offset.popular = 0;
+    offset.near = 0;
     var service = {
       getMember: (userId) => $http.get(back + '/' + userId).then(res => res.data.data),
       getMembers: (count) => {
@@ -61,20 +63,45 @@
         return service.getMembers()
         .then(members => {
           var popSorted =  members.sort((a, b) => {
-            return a.matches.length - b.matches.length;
+            console.log(a, b);
+            return b._matches.length - a._matches.length;
           })
-          if (forwards === true) {
-            popularOffset += 5;
-            popularOffset = Math.min(popSorted.length - 5, popularOffset);
-          } else if (forwards === false) {
-            popularOffset -= 5;
-            popularOffset = Math.max(0, popularOffset);
-          }
-          return popSorted.slice(popularOffset, popularOffset + 5);
+          moveOffset(popSorted, 'popular', forwards);
+          return popSorted.slice(offset.popular, offset.popular + 5);
+        })
+      },
+      getNear: (lat, long, forwards) => {
+        return service.getMembers()
+        .then(members => {
+          var nearMembers = members.sort((a, b) => {
+            var latA = a.address.geo.lat;
+            var longA = b.address.geo.lng;
+            var latB = b.address.geo.lat;
+            var longB = b.address.geo.lat;
+            return
+            Math.sqrt(
+              Math.pow((lat - latA), 2) + Math.pow((long - longA), 2)) <
+            Math.sqrt(
+              Math.pow((lat - latB), 2) + Math.pow((long - longB), 2));
+          })
+          moveOffset(nearMembers, 'near', forwards);
+          return nearMembers.slice(offset.near, offset.near + 5)
         })
       }
     }
     return service;
+
+    function moveOffset(array, offsetToMove, forwards) {
+      if (forwards === true) {
+        offset[offsetToMove] += 5;
+        offset[offsetToMove] =
+          Math.min(array.length - 5, offset[offsetToMove]);
+      } else if (forwards === false) {
+        offset[offsetToMove] -= 5;
+        offset[offsetToMove] =
+          Math.max(0, offset[offsetToMove]);
+      }
+    }
 
     /**
      * getMembersFromLocal - Returns the (count) members from our local

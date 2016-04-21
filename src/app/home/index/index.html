@@ -4,8 +4,8 @@
       <div class="center">
         <span class="clickable" ng-click="getNew(5)">New</span> |
         <span class="clickable" ng-click="getMatches()">Matches</span> |
-        <span class="clickable">Popular</span> |
-        <span class="clickable">Near Me</span> |
+        <span class="clickable" ng-click="getPopular()">Popular</span> |
+        <span class="clickable" ng-click="getNear()">Near Me</span> |
         <span class="clickable">Chatting</span>
       </div>
     </div>
@@ -14,6 +14,19 @@
       <person ng-show="dataReceived" ng-repeat="profile in profiles" info="profile">
 
       </person>
+      <div class="row" ng-show="currentSelection=='popular'">
+        <ul class="pager">
+          <li class="previous" ng-click="getPopular(false)"><a>Previous</a></li>
+          <li class="next" ng-click="getPopular(true)"><a>Next</a></li>
+        </ul>
+      </div>
+      <div class="row" ng-show="currentSelection=='near'">
+        <ul class="pager">
+          <li class="previous" ng-click="getNear(false)"><a>Previous</a></li>
+          <li class="next" ng-click="getNear(true)"><a>Next</a></li>
+        </ul>
+      </div>
+
     </div>
   </div>
   <div class="col-xs-1">
