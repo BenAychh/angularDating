@@ -7,8 +7,31 @@
     </h3>
   </div>
   <div class="col-xs-8">
-    <h3 class="pull-left">{{profile.names.firstName}} {{profile.names.lastName}}</h3>
-    Gender: {{profile.gender}}
-    <p class="pull-left">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+    <div class="row">
+      <h3 class="col-xs">{{profile.names.firstName}} {{profile.names.lastName}}</h3>
+    </div>
+    <div class="row">
+      Interested In: <ul>
+        <li ng-repeat="number in profile.interestedIn">
+          <ng-pluralize count="number" when="{
+            '0': 'Men',
+            '1': 'Women',
+            '2': 'Both',
+            '3': 'Platonic',
+          }"  offset="">,</ng-pluralize>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      Gender: <ng-pluralize count="profile.gender" when="{
+          '0': 'Male',
+          '1': 'Female',
+          '2': 'Undisclosed',
+          '3': 'Fluid',
+        }"  offset=""></ng-pluralize>
+    </div>
+    <div class="row">
+      Number of Matches: {{profile._matches.length}}
+    </div>
   </div>
 </div>

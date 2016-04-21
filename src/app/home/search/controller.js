@@ -13,7 +13,8 @@
       then(searchResults => {
         $scope.searching = false;
         $scope.searchProfiles = searchResults;
-      })
+        $scope.$digest();
+      });
     }
   }
 })();

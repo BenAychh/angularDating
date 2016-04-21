@@ -1,24 +1,42 @@
 <div ng-controller="homeSearchController">
-  <form ng-submit="doSearch()">
-    <select class="form-control" ng-model="searchForm.strict" ng-init="searchForm.strict = 'true'">
-      <option value="true">Match All</option>
-      <option value="false">Match Any</option>
-    </select>
-    <div class="form-group">
-      <label for="">Gender</label>
-      <select class="form-control" ng-model="searchForm.gender">
-        <option value="">Choose</option>
-        <option value="0">Male</option>
-        <option value="1">Female</option>
-        <option value="2">Undeclared</option>
-        <option value="3">Fluid</option>
+  <form class="form">
+    <div class="row">
+      <select class="form-control" ng-model="searchForm.strict" ng-change="doSearch()" ng-init="searchForm.strict = 'true'">
+        <option value="true">Match All</option>
+        <option value="false">Match Any</option>
       </select>
+      <div class="form-group">
+        <label for="">Gender</label>
+        <select class="form-control" ng-model="searchForm.gender" ng-change="doSearch()">
+          <option value="">Choose</option>
+          <option value="0">Male</option>
+          <option value="1">Female</option>
+          <option value="2">Undeclared</option>
+          <option value="3">Fluid</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Interested In</label>
+        <select class="form-control" ng-model="searchForm.interestedIn" ng-change="doSearch()">
+          <option value="">Choose</option>
+          <option value="0">Male</option>
+          <option value="1">Female</option>
+          <option value="2">Undeclared</option>
+          <option value="3">Fluid</option>
+        </select>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="">First Name</label>
-      <input type="text" ng-model="searchForm.names_firstName" value="">
+    <div class="row">
+      <div class="form-group">
+        <label for="">First Name</label>
+        <input class type="text" ng-model="searchForm.names_firstName" ng-change="doSearch()" value="">
+      </div>
+      <div class="form-group">
+        <label for="">Last Name</label>
+        <input class type="text" ng-model="searchForm.names_lastName" ng-change="doSearch()" value="">
+      </div>
     </div>
-    <input type="submit" class="form-control" value="Submit">
+
   </form>
   <img src="/img/loading.gif" alt="Loading" ng-show="searching" class="img-responsive"/>
   <person ng-repeat="profile in searchProfiles" info="profile">
